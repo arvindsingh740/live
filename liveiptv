@@ -1,0 +1,26 @@
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('https://air9q2dn.anycast.nagra.com/AIR9Q2DN/wvls/contentlicenseservice/v1/licenses');
+$request->setMethod(HTTP_Request2::METHOD_POST);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'nv-authorizations' => 'eyJraWQiOiIzNjk0MDciLCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXIiOiIxLjAiLCJ0eXAiOiJDb250ZW50QXV0aFoiLCJleHAiOjE2MTkyNjQ0NzAsImNvbnRlbnRSaWdodHMiOlt7ImNvbnRlbnRJZCI6InplZWNpbmVtYWhkIiwic3RhcnQiOiIyMDIxLTAyLTIzVDE3OjExOjEwLjIyMVoiLCJlbmQiOiIyMDIxLTAzLTA2VDAwOjA4OjIyLjkyNVoiLCJkdXJhdGlvbiI6NTE4NDAwMCwic3RvcmFibGUiOnRydWUsImRlZmF1bHRVc2FnZVJ1bGVzIjp7ImRpZ2l0YWxPbmx5IjpmYWxzZSwiaGRjcCI6ZmFsc2UsInVucHJvdGVjdGVkRGlnaXRhbE91dHB1dCI6dHJ1ZX19XX0.UMMajAzk52aV4l8YxtjCybzwZ9n2UNT685WJDncM0U4',
+  'Cookie' => '__cfduid=d3fcba8aa56dcd21dfd5723740d7b52fd1614097755'
+));
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+?>
